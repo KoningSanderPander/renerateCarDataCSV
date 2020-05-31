@@ -1,9 +1,8 @@
 package io;
 
-import classes.CarModel;
+import vehicleParts.CarModel;
 
 import java.io.*;
-import java.util.Arrays;
 import java.util.HashMap;
 
 public class IO {
@@ -29,7 +28,9 @@ public class IO {
         while ((line = modelsCsvReader.readLine()) != null) {
             String[] data = line.split(",");
 
-            System.out.println(Arrays.toString(data));
+//            System.out.println(Arrays.toString(data));
+
+
             modelHashMap.putIfAbsent(
                     Integer.valueOf(data[0]),
                     new CarModel(
