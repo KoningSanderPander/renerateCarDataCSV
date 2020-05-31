@@ -1,8 +1,9 @@
 package vehicleParts.engines.electric;
 
+import com.mifmif.common.regex.Generex;
 import vehicleParts.engines.Engine;
 
-public class Electric extends Engine {
+public class Electric {
 
     private int maxVoltage;
     private int maxCurrent;

@@ -4,9 +4,10 @@ import vehicleParts.CarModel;
 
 import java.io.*;
 import java.util.HashMap;
+import java.util.Objects;
 
 public class IO {
-    private static final String PATH_TO_MODELS_CSV = "src/io/vehicleModelData.csv";
+    private static final String PATH_TO_MODELS_CSV = "src/main/java/io/vehicleModelData.csv";
 
     public static HashMap<Integer, CarModel> loadModels() throws IOException {
         HashMap<Integer, CarModel> modelHashMap = new HashMap<>();
@@ -16,8 +17,13 @@ public class IO {
         try {
             fileReader = new FileReader(PATH_TO_MODELS_CSV);
         } catch (FileNotFoundException e) {
-            System.out.printf("models CSV file could not be found\n%s", e);
-            System.exit(0);
+            System.out.printf("models CSV file could not be found\n" +
+                    "%s\n" +
+                    "Try using the code found on line 24 and 25 of the IO class to find the filepath.\n\n", e);
+
+            File file = new File(".");
+            for(String fileNames : Objects.requireNonNull(file.list())) System.out.println(fileNames);
+            System.exit(1);
         }
 
         // Read models file per line
