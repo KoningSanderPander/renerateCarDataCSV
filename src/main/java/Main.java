@@ -1,7 +1,7 @@
 import com.mifmif.common.regex.Generex;
 import com.mifmif.common.regex.util.Iterator;
-import vehicleParts.CarModel;
 import io.IO;
+import vehicleParts.CarModel;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -18,18 +18,20 @@ import java.util.List;
 public class Main {
 
     public static void main(String[] args) {
+        final String PATH_VEHICLE_MODELS_CSV = "src/main/resources/vehicleModelData.csv";
 
         HashMap<Integer, CarModel> modelHashMap = new HashMap<>();
 
+
         try {
-            modelHashMap = IO.loadModels();
+            modelHashMap = IO.loadModels(IO.loadFilePath(PATH_VEHICLE_MODELS_CSV));
         } catch (IOException e) {
             e.printStackTrace();
         }
 
         System.out.println(modelHashMap);
 
-
+/*
         Generex generex = new Generex("[0-3]([a-c]|[e-g]{1,2})");
 
         // Generate random String
@@ -48,7 +50,7 @@ public class Main {
         while (iterator.hasNext()) {
             System.out.print(iterator.next() + " ");
         }
-
+*/
     }
 
 }

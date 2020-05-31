@@ -7,15 +7,12 @@ import java.util.HashMap;
 import java.util.Objects;
 
 public class IO {
-    private static final String PATH_TO_MODELS_CSV = "src/main/java/io/vehicleModelData.csv";
 
-    public static HashMap<Integer, CarModel> loadModels() throws IOException {
-        HashMap<Integer, CarModel> modelHashMap = new HashMap<>();
-
+    public static BufferedReader loadFilePath (String path){
         // File lookup
         Reader fileReader = null;
         try {
-            fileReader = new FileReader(PATH_TO_MODELS_CSV);
+            fileReader = new FileReader(path);
         } catch (FileNotFoundException e) {
             System.out.printf("models CSV file could not be found\n" +
                     "%s\n" +
@@ -26,16 +23,19 @@ public class IO {
             System.exit(1);
         }
 
-        // Read models file per line
-        BufferedReader modelsCsvReader = new BufferedReader(fileReader);
+        // Return Buffered file reader
+        return new BufferedReader(fileReader);
+
+    }
+
+
+    public static HashMap<Integer, CarModel> loadModels(BufferedReader modelsCsvReader) throws IOException {
+        HashMap<Integer, CarModel> modelHashMap = new HashMap<>();
 
         // Enter data in to CarModel objects
         String line;
         while ((line = modelsCsvReader.readLine()) != null) {
             String[] data = line.split(",");
-
-//            System.out.println(Arrays.toString(data));
-
 
             modelHashMap.putIfAbsent(
                     Integer.valueOf(data[0]),
@@ -50,11 +50,9 @@ public class IO {
                             Integer.parseInt(data[7]),
                             data[8]
                     ));
-
         }
         modelsCsvReader.close();
 
         return modelHashMap;
-
     }
 }
