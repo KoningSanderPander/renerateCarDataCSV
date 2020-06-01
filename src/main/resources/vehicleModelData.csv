@@ -539,13 +539,13 @@
 539,Chevrolet,HHR,2010,premium unleaded (recommended),MANUAL,260,26255,|n
 540,Chevrolet,HHR,2011,flex-fuel (unleaded/E85),MANUAL,155,19720,|n
 541,Chevrolet,Impala,2015,flex-fuel (unleaded/E85),AUTOMATIC,305,35440,|n
-542,Chevrolet,Impala,2015,flex-fuel (unleaded/natural gas),AUTOMATIC,305,40660,|n
+542,Chevrolet,Impala,2015,flex-fuel (unleaded/E85),AUTOMATIC,305,40660,541
 543,Chevrolet,Impala,2015,regular unleaded,AUTOMATIC,195,34465,|n
 544,Chevrolet,Impala,2016,flex-fuel (unleaded/E85),AUTOMATIC,305,35540,|n
-545,Chevrolet,Impala,2016,flex-fuel (unleaded/natural gas),AUTOMATIC,305,40810,|n
+545,Chevrolet,Impala,2016,flex-fuel (unleaded/E85),AUTOMATIC,305,40810,544
 546,Chevrolet,Impala,2016,regular unleaded,AUTOMATIC,195,29460,|n
 547,Chevrolet,Impala,2017,flex-fuel (unleaded/E85),AUTOMATIC,305,35645,|n
-548,Chevrolet,Impala,2017,flex-fuel (unleaded/natural gas),AUTOMATIC,305,40915,|n
+548,Chevrolet,Impala,2017,flex-fuel (unleaded/E85),AUTOMATIC,305,40915,547
 549,Chevrolet,Impala Limited,2014,flex-fuel (unleaded/E85),AUTOMATIC,300,30535,|n
 550,Chevrolet,Impala Limited,2015,flex-fuel (unleaded/E85),AUTOMATIC,300,30535,549
 551,Chevrolet,Impala Limited,2016,flex-fuel (unleaded/E85),AUTOMATIC,300,30535,550

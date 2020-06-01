@@ -1,11 +1,8 @@
-import com.mifmif.common.regex.Generex;
-import com.mifmif.common.regex.util.Iterator;
 import io.IO;
-import vehicleParts.CarModel;
+import models.CarModel;
 
 import java.io.IOException;
 import java.util.HashMap;
-import java.util.List;
 
 /**
  * The purpose of this project is to generate a .CSV file
@@ -18,8 +15,10 @@ import java.util.List;
 public class Main {
 
     public static void main(String[] args) {
+        // File paths
         final String PATH_VEHICLE_MODELS_CSV = "src/main/resources/vehicleModelData.csv";
 
+        // Data sets
         HashMap<Integer, CarModel> modelHashMap = new HashMap<>();
 
 

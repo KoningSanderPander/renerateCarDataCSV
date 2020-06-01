@@ -3,7 +3,7 @@
  *
  * @author Sander van den Oetelaar
  */
-package vehicleParts;
+package models;
 
 public class CarModel {
     private int id;

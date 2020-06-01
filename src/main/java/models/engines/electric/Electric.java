@@ -1,7 +1,4 @@
-package vehicleParts.engines.electric;
-
-import com.mifmif.common.regex.Generex;
-import vehicleParts.engines.Engine;
+package models.engines.electric;
 
 public class Electric {
 
