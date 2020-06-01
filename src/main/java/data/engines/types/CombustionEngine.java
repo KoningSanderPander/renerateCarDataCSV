@@ -2,23 +2,23 @@ package data.engines.types;
 
 import data.engines.Engine;
 
-public class Combustion extends Engine {
+public class CombustionEngine extends Engine {
 
     private String fuel;
     private int cylinders;
-    private int hasForcedInduction;
+    private String forcedInductionType;
     private int displacement;
     private int maxRPM;
     private int peakRPM;
     private double kmPerLiter;
 
-    public Combustion(
-            String engineCode,
+    public CombustionEngine(
+            int engineCode,
             int hp,
             int torque,
             String fuel,
             int cylinders,
-            int hasForcedInduction,
+            String forcedInductionType,
             int displacement,
             int maxRPM,
             int peakRPM,
@@ -30,7 +30,7 @@ public class Combustion extends Engine {
         );
         this.fuel = fuel;
         this.cylinders = cylinders;
-        this.hasForcedInduction = hasForcedInduction;
+        this.forcedInductionType = forcedInductionType;
         this.displacement = displacement;
         this.maxRPM = maxRPM;
         this.peakRPM = peakRPM;

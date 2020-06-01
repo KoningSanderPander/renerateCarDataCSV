@@ -2,7 +2,7 @@ package data.engines.types;
 
 import data.engines.Engine;
 
-public class Electric extends Engine {
+public class ElectricEngine extends Engine {
 
     private String fuel;
     private int maxVoltage;
@@ -10,9 +10,11 @@ public class Electric extends Engine {
     private int kWh;
     private int kmPerKwh;
 
-    public Electric(
-            String engineCode, int hp,
-            int torque, String fuel,
+    public ElectricEngine(
+            int engineCode,
+            int hp,
+            int torque,
+            String fuel,
             int maxVoltage,
             int maxCurrent,
             int kWh,
