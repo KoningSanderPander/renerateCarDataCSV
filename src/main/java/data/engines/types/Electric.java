@@ -1,4 +1,4 @@
-package models.engines.electric;
+package models.engines.types;
 
 public class Electric {
 
