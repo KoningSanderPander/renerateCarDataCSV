@@ -1,5 +1,5 @@
 import io.IO;
-import models.CarModel;
+import data.CarModel;
 
 import java.io.IOException;
 import java.util.HashMap;

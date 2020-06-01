@@ -1,6 +1,6 @@
 package io;
 
-import models.CarModel;
+import data.CarModel;
 
 import java.io.*;
 import java.util.HashMap;
