@@ -35,6 +35,7 @@ public class IO {
         }
 
         manufacturersCsvReader.close();
+        System.out.printf("%24s: %5d%n", "Loaded manufacturers", manufacturers.size());
         return manufacturers.toArray(String[]::new);
     }
 
@@ -52,6 +53,7 @@ public class IO {
         }
 
         fuelTypesCsvReader.close();
+        System.out.printf("%24s: %5d%n", "Loaded fuel types", fuelTypes.size());
         return fuelTypes.toArray(String[]::new);
     }
 
@@ -109,7 +111,27 @@ public class IO {
         }
 
         combustionEngineCsvReader.close();
+        System.out.printf("%24s: %5d%n", "Loaded engines", engineMap.values().stream().mapToInt(TreeMap::size).sum());
         return engineMap;
+    }
+
+    public static Option[] loadOptions(ReusableBufferedReader optionsCsvReader) throws IOException {
+        LinkedList<Option> options = new LinkedList<>();
+
+        String line;
+        while ((line = optionsCsvReader.readLine()) != null) {
+            String[] data = line.split(",");
+            options.add(
+                    new Option(
+                            data[0],
+                            Integer.parseInt(data[1])
+                    )
+            );
+        }
+
+        optionsCsvReader.close();
+        System.out.printf("%24s: %5d%n", "Loaded options", options.size());
+        return options.toArray(Option[]::new);
     }
 
     /**
@@ -141,24 +163,7 @@ public class IO {
         }
         modelsCsvReader.close();
 
+        System.out.printf("%24s: %5d%n", "Loaded models", modelHashMap.size());
         return modelHashMap;
-    }
-
-    public static Option[] loadOptions(ReusableBufferedReader optionsCsvReader) throws IOException {
-        LinkedList<Option> options = new LinkedList<>();
-
-        String line;
-        while ((line = optionsCsvReader.readLine()) != null) {
-            String[] data = line.split(",");
-            options.add(
-                    new Option(
-                            data[0],
-                            Integer.parseInt(data[1])
-                    )
-            );
-        }
-
-        optionsCsvReader.close();
-        return options.toArray(Option[]::new);
     }
 }

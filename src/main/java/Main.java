@@ -1,11 +1,11 @@
 import data.CarModel;
 import data.Option;
+import data.Vehicle;
 import data.engines.Engine;
 import io.IO;
 
 import java.io.FileReader;
-import java.util.HashMap;
-import java.util.TreeMap;
+import java.util.*;
 
 /**
  * The purpose of this project is to generate a .CSV file
@@ -18,6 +18,10 @@ import java.util.TreeMap;
 public class Main {
 
     public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        Random random = new Random();
+        int nrOfVehicles;
+
         // File paths
         IO io = new IO();
         final String PATH_FUEL_TYPES_CSV = "src/main/resources/fueltypes.csv";
@@ -40,8 +44,8 @@ public class Main {
             fuelTypes = IO.loadFuelTypes(io.loadFilePath(new FileReader(PATH_FUEL_TYPES_CSV)));
             engineMap = IO.loadCombustionEngines(io.loadFilePath(new FileReader(PATH_COMBUSTION_CSV)),
                     io.loadFilePath(new FileReader(PATH_ELECTRIC_CSV)), fuelTypes);
+            options = IO.loadOptions(io.loadFilePath(new FileReader(PATH_OPTIONS_CSV)));
             modelHashMap = IO.loadModels(io.loadFilePath(new FileReader(PATH_VEHICLE_MODELS_CSV)));
-            options = IO.loadOptions(io.loadFilePath(new FileReader(PATH_VEHICLE_MODELS_CSV)));
         } catch (Exception e) {
             e.printStackTrace();
 
@@ -55,7 +59,21 @@ public class Main {
             System.exit(69);
         }
 
-        
+        System.out.printf("%nNr of vehicles: ");
+        nrOfVehicles = scanner.nextInt();
+        LinkedList<Vehicle> vehicles = new LinkedList<>();
+        for (int i = 0; i < nrOfVehicles; i++) {
+//            System.out.println(random.nextInt(modelHashMap.size() + 1));
+            vehicles.add(new Vehicle(modelHashMap.get(random.nextInt(modelHashMap.size() + 1))));
+        }
+
+        for (Vehicle vehicle : vehicles) {
+            vehicle.setEngine(engineMap);
+        }
+
+        scanner.close();
+        System.out.printf("%nGenerating Vehicles");
+
 
 
 

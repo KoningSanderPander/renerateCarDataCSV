@@ -12,4 +12,7 @@ public abstract class Engine {
         this.torque = torque;
     }
 
+    public int getHp() {
+        return hp;
+    }
 }

@@ -49,4 +49,21 @@ public class CarModel {
                 msrp,
                 parent);
     }
+
+    public String getMake() {
+        return make;
+    }
+
+    public String getModel() {
+        return model;
+    }
+
+    public String getFuelType() {
+        return fuelType;
+    }
+
+    public int getHp(){
+        return hp;
+    }
+
 }
