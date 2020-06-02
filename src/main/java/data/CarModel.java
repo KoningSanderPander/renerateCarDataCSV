@@ -66,4 +66,7 @@ public class CarModel {
         return hp;
     }
 
+    public int getMsrp() {
+        return msrp;
+    }
 }

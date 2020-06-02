@@ -16,6 +16,10 @@ public class CarOption implements Comparable<CarOption>{
         return id;
     }
 
+    public int getPrice() {
+        return price;
+    }
+
     @Override
     public int compareTo(CarOption other) {
         return Integer.compare(id, other.getId());

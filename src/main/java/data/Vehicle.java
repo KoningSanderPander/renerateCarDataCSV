@@ -12,6 +12,7 @@ public class Vehicle {
     private Engine engine;
     private TreeSet<CarOption> options;
 
+    private static final double MODEL_OPTION_PRICE_MULTIPLIER = 0.0001;
     private static final double POWER_OFFSET_MARGIN = 0.20;
     private final int MAX_POWER_OFFSET;
 
@@ -23,11 +24,11 @@ public class Vehicle {
     }
 
     public void setEngine(HashMap<String, TreeMap<Integer, Engine>> engineMap) {
-        List<Engine> engines = filterEngines(engineMap.get(model.getFuelType()));
-            this.engine = engines.get(random.nextInt(engines.size()));
+        List<Engine> engines = getEnginesInModelRange(engineMap.get(model.getFuelType()));
+        engine = engines.get(random.nextInt(engines.size()));
     }
 
-    private List<Engine> filterEngines(TreeMap<Integer, Engine> engineTreeMap) {
+    private List<Engine> getEnginesInModelRange(TreeMap<Integer, Engine> engineTreeMap) {
         return engineTreeMap.values()
                 .stream()
                 .filter(this::isEngineWithinModelRange)
@@ -45,5 +46,9 @@ public class Vehicle {
         while (options.size() < numberOfOptions) {
             options.add(carOptions[random.nextInt(carOptions.length)]);
         }
+    }
+
+    private int calculateOptionPrice(CarOption option) {
+        return (int) (option.getPrice() * model.getMsrp() * MODEL_OPTION_PRICE_MULTIPLIER);
     }
 }
