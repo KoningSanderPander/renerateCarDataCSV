@@ -11,7 +11,7 @@ public class ElectricEngine extends Engine {
     private double kmPerKwh;
 
     public ElectricEngine(
-            int engineCode,
+            long engineCode,
             int hp,
             int torque,
             String fuel,

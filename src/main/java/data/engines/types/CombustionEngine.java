@@ -13,7 +13,7 @@ public class CombustionEngine extends Engine {
     private double kmPerLiter;
 
     public CombustionEngine(
-            int engineCode,
+            long engineCode,
             int hp,
             int torque,
             String fuel,

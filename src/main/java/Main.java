@@ -1,5 +1,5 @@
 import data.CarModel;
-import data.Option;
+import data.CarOption;
 import data.Vehicle;
 import data.engines.Engine;
 import io.IO;
@@ -27,6 +27,7 @@ public class Main {
         final String PATH_FUEL_TYPES_CSV = "src/main/resources/fueltypes.csv";
         final String PATH_COMBUSTION_CSV = "src/main/resources/combustion.csv";
         final String PATH_ELECTRIC_CSV = "src/main/resources/electric.csv";
+        final String PATH_ENGINES_CSV = "src/main/resources/engines.csv";
         final String PATH_MANUFACTURERS_CSV = "src/main/resources/manufacturers.csv";
         final String PATH_OPTIONS_CSV = "src/main/resources/options.csv";
         final String PATH_VEHICLE_MODELS_CSV = "src/main/resources/vehicleModelData.csv";
@@ -36,15 +37,14 @@ public class Main {
         String[] fuelTypes = null;
         HashMap<String, TreeMap<Integer, Engine>> engineMap = new HashMap<>();
         HashMap<Integer, CarModel> modelHashMap = new HashMap<>();
-        Option[] options = null;
+        CarOption[] carOptions = null;
 
         // Load manufacturers, fuel types, engines, car models, and options
         try {
             manufacturers = IO.loadManufacturers(io.loadFilePath(new FileReader(PATH_MANUFACTURERS_CSV)));
             fuelTypes = IO.loadFuelTypes(io.loadFilePath(new FileReader(PATH_FUEL_TYPES_CSV)));
-            engineMap = IO.loadCombustionEngines(io.loadFilePath(new FileReader(PATH_COMBUSTION_CSV)),
-                    io.loadFilePath(new FileReader(PATH_ELECTRIC_CSV)), fuelTypes);
-            options = IO.loadOptions(io.loadFilePath(new FileReader(PATH_OPTIONS_CSV)));
+            engineMap = IO.loadEngines(io.loadFilePath(new FileReader(PATH_ENGINES_CSV)), fuelTypes);
+            carOptions = IO.loadOptions(io.loadFilePath(new FileReader(PATH_OPTIONS_CSV)));
             modelHashMap = IO.loadModels(io.loadFilePath(new FileReader(PATH_VEHICLE_MODELS_CSV)));
         } catch (Exception e) {
             e.printStackTrace();
@@ -56,24 +56,25 @@ public class Main {
 //            File file = new File(".");
 //            for (String fileNames : Objects.requireNonNull(file.list())) System.out.println(fileNames);
 
-            System.exit(69);
+            System.exit(1);
         }
 
         System.out.printf("%nNr of vehicles: ");
         nrOfVehicles = scanner.nextInt();
+
+        System.out.printf("%nGenerating Vehicles... ");
         LinkedList<Vehicle> vehicles = new LinkedList<>();
         for (int i = 0; i < nrOfVehicles; i++) {
-//            System.out.println(random.nextInt(modelHashMap.size() + 1));
-            vehicles.add(new Vehicle(modelHashMap.get(random.nextInt(modelHashMap.size() + 1))));
+            vehicles.add(new Vehicle(modelHashMap.get(random.nextInt(modelHashMap.size())+1)));
         }
+        scanner.close();
 
         for (Vehicle vehicle : vehicles) {
             vehicle.setEngine(engineMap);
+            vehicle.setOptions(carOptions);
         }
 
-        scanner.close();
-        System.out.printf("%nGenerating Vehicles");
-
+        System.out.println("Done");
 
 
 
