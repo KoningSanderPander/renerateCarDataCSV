@@ -8,7 +8,7 @@ public class ElectricEngine extends Engine {
     private int maxVoltage;
     private int maxCurrent;
     private int kWh;
-    private int kmPerKwh;
+    private double kmPerKwh;
 
     public ElectricEngine(
             int engineCode,
@@ -18,7 +18,7 @@ public class ElectricEngine extends Engine {
             int maxVoltage,
             int maxCurrent,
             int kWh,
-            int kmPerKwh) {
+            double kmPerKwh) {
         super(
                 engineCode,
                 hp,

@@ -1,12 +1,9 @@
+import data.CarModel;
+import data.Option;
 import data.engines.Engine;
 import io.IO;
-import data.CarModel;
 
-import java.io.FileNotFoundException;
 import java.io.FileReader;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.TreeMap;
 
@@ -31,17 +28,20 @@ public class Main {
         final String PATH_VEHICLE_MODELS_CSV = "src/main/resources/vehicleModelData.csv";
 
         // Data sets
+        String[] manufacturers = null;
         String[] fuelTypes = null;
         HashMap<String, TreeMap<Integer, Engine>> engineMap = new HashMap<>();
-
-
         HashMap<Integer, CarModel> modelHashMap = new HashMap<>();
+        Option[] options = null;
 
-        // Load fuel types, engines, car models
+        // Load manufacturers, fuel types, engines, car models, and options
         try {
+            manufacturers = IO.loadManufacturers(io.loadFilePath(new FileReader(PATH_MANUFACTURERS_CSV)));
             fuelTypes = IO.loadFuelTypes(io.loadFilePath(new FileReader(PATH_FUEL_TYPES_CSV)));
-            engineMap = IO.loadCombustionEngines(io.loadFilePath(new FileReader(PATH_COMBUSTION_CSV)), fuelTypes);
+            engineMap = IO.loadCombustionEngines(io.loadFilePath(new FileReader(PATH_COMBUSTION_CSV)),
+                    io.loadFilePath(new FileReader(PATH_ELECTRIC_CSV)), fuelTypes);
             modelHashMap = IO.loadModels(io.loadFilePath(new FileReader(PATH_VEHICLE_MODELS_CSV)));
+            options = IO.loadOptions(io.loadFilePath(new FileReader(PATH_VEHICLE_MODELS_CSV)));
         } catch (Exception e) {
             e.printStackTrace();
 
@@ -55,20 +55,13 @@ public class Main {
             System.exit(69);
         }
 
-        System.out.println(Arrays.toString(fuelTypes));
-        System.out.println(engineMap.get(fuelTypes[0]));
-        System.out.println(modelHashMap.toString());
+        
 
 
 
 
 
-
-
-
-
-
-/*
+        /*
         Generex generex = new Generex("[0-3]([a-c]|[e-g]{1,2})");
 
         // Generate random String
