@@ -57,6 +57,21 @@ public class Main {
             System.exit(1);
         }
 
+        HashMap<CarModel, Option[]> optionsHashMap = new HashMap<>();
+
+        for (CarModel model: modelHashMap.values()) {
+
+            int modelprice = model.getMsrp();
+
+            for (Option option : options) {
+                option.recalculateOptionPrice(modelprice);
+            }
+
+            optionsHashMap.putIfAbsent(model, options);
+
+        }
+
+
         System.out.printf("%nNr of vehicles: ");
         nrOfVehicles = scanner.nextInt();
 
