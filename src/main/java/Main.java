@@ -25,8 +25,6 @@ public class Main {
         // File paths
         IO io = new IO();
         final String PATH_FUEL_TYPES_CSV = "src/main/resources/fueltypes.csv";
-        final String PATH_COMBUSTION_CSV = "src/main/resources/combustion.csv";
-        final String PATH_ELECTRIC_CSV = "src/main/resources/electric.csv";
         final String PATH_ENGINES_CSV = "src/main/resources/engines.csv";
         final String PATH_MANUFACTURERS_CSV = "src/main/resources/manufacturers.csv";
         final String PATH_OPTIONS_CSV = "src/main/resources/options.csv";
