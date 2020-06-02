@@ -1,7 +1,7 @@
 package io;
 
 import data.CarModel;
-import data.Option;
+import data.CarOption;
 import data.engines.Engine;
 import data.engines.types.CombustionEngine;
 import data.engines.types.ElectricEngine;
@@ -21,7 +21,7 @@ public class IO {
     public ReusableBufferedReader loadFilePath(final FileReader FILE) {
         // File lookup
 
-        return new ReusableBufferedReader(new char[1024 * 1024])
+        return new ReusableBufferedReader(new char[2048 * 2048])
                 .setSource(FILE);
     }
 
@@ -58,14 +58,13 @@ public class IO {
     }
 
     /**
-     * @param combustionEngineCsvReader BufferedFileReader
-     * @param fuelTypes                 fuel types like petrol and diesel
+     * @param engineCsvReader BufferedFileReader
+     * @param fuelTypes       fuel types like petrol and diesel
      * @return Map of a sorted map based on fuel type and horsepower
      * @throws IOException Input Output Error
      */
-    public static HashMap<String, TreeMap<Integer, Engine>> loadCombustionEngines(
-            ReusableBufferedReader combustionEngineCsvReader,
-            ReusableBufferedReader electricEngineCsvReader,
+    public static HashMap<String, TreeMap<Integer, Engine>> loadEngines(
+            ReusableBufferedReader engineCsvReader,
             String[] fuelTypes) throws IOException {
 
         HashMap<String, TreeMap<Integer, Engine>> engineMap = new HashMap<>();
@@ -74,64 +73,70 @@ public class IO {
         }
 
         String line;
-        while ((line = combustionEngineCsvReader.readLine()) != null) {
+        while ((line = engineCsvReader.readLine()) != null) {
+
             String[] data = line.split(",");
 
-            engineMap.get(data[3]).putIfAbsent(Integer.parseInt(data[1]),
-                    new CombustionEngine(
-                            Integer.parseInt(data[0]),
-                            Integer.parseInt(data[1]),
-                            Integer.parseInt(data[2]),
-                            data[3],
-                            Integer.parseInt(data[4]),
-                            data[5],
-                            Integer.parseInt(data[6]),
-                            Integer.parseInt(data[7]),
-                            Integer.parseInt(data[8]),
-                            Double.parseDouble(data[9])
-                    )
-            );
+            while (engineMap.get(data[3]).containsKey(Integer.parseInt(data[1]))) {
+                data[1] = String.valueOf(Integer.parseInt(data[1]) + 1);
+            }
+
+            if (!data[3].equals(fuelTypes[6])) {
+                engineMap.get(data[3]).putIfAbsent(Integer.parseInt(data[1]),
+                        new CombustionEngine(
+                                Long.parseLong(data[0]),
+                                Integer.parseInt(data[1]),
+                                Integer.parseInt(data[2]),
+                                data[3],
+                                Integer.parseInt(data[4]),
+                                data[5],
+                                Integer.parseInt(data[6]),
+                                Integer.parseInt(data[7]),
+                                Integer.parseInt(data[8]),
+                                Double.parseDouble(data[9])
+                        )
+                );
+
+            } else {
+
+                engineMap.get(data[3]).putIfAbsent(Integer.parseInt(data[1]),
+                        new ElectricEngine(
+                                Long.parseLong(data[0]),
+                                Integer.parseInt(data[1]),
+                                Integer.parseInt(data[2]),
+                                data[3],
+                                Integer.parseInt(data[4]),
+                                Integer.parseInt(data[5]),
+                                Integer.parseInt(data[6]),
+                                Double.parseDouble(data[7])
+                        )
+                );
+            }
         }
 
-        while ((line = electricEngineCsvReader.readLine()) != null) {
-            String[] data = line.split(",");
-
-            engineMap.get(data[3]).putIfAbsent(Integer.parseInt(data[1]),
-                    new ElectricEngine(
-                            Integer.parseInt(data[0]),
-                            Integer.parseInt(data[1]),
-                            Integer.parseInt(data[2]),
-                            data[3],
-                            Integer.parseInt(data[4]),
-                            Integer.parseInt(data[5]),
-                            Integer.parseInt(data[6]),
-                            Double.parseDouble(data[7])
-                    )
-            );
-        }
-
-        combustionEngineCsvReader.close();
+        engineCsvReader.close();
         System.out.printf("%24s: %5d%n", "Loaded engines", engineMap.values().stream().mapToInt(TreeMap::size).sum());
         return engineMap;
     }
 
-    public static Option[] loadOptions(ReusableBufferedReader optionsCsvReader) throws IOException {
-        LinkedList<Option> options = new LinkedList<>();
+    public static CarOption[] loadOptions(ReusableBufferedReader optionsCsvReader) throws IOException {
+        LinkedList<CarOption> carOptions = new LinkedList<>();
 
         String line;
         while ((line = optionsCsvReader.readLine()) != null) {
             String[] data = line.split(",");
-            options.add(
-                    new Option(
-                            data[0],
-                            Integer.parseInt(data[1])
+            carOptions.add(
+                    new CarOption(
+                            Integer.parseInt(data[0]),
+                            data[1],
+                            Integer.parseInt(data[2])
                     )
             );
         }
 
         optionsCsvReader.close();
-        System.out.printf("%24s: %5d%n", "Loaded options", options.size());
-        return options.toArray(Option[]::new);
+        System.out.printf("%24s: %5d%n", "Loaded options", carOptions.size());
+        return carOptions.toArray(CarOption[]::new);
     }
 
     /**
